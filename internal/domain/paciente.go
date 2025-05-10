@@ -3,22 +3,7 @@ package domain
 import (
 	"fmt"
 	"time"
-
-	"github.com/go-playground/validator/v10"
 )
-
-type Sexo int
-
-const (
-	Masculino = iota
-	Femenino
-	Otro
-)
-
-// Mapea enum a string
-func (s Sexo) String() string {
-	return [...]string{"Masculino", "Femenino", "Otro"}[s]
-}
 
 // String a enum
 func ParseSexo(s string) (Sexo, error) {
@@ -35,31 +20,28 @@ func ParseSexo(s string) (Sexo, error) {
 }
 
 type Paciente struct {
+	ID        int
+	Nomyape   string
+	DNI       string
+	Fechanac  time.Time
+	Sexo      Sexo
+	Email     string
+	Direccion string
+	Telefono  string
+}
+
+/*
+type Paciente struct {
 	ID        int       `json:"id"`
 	Nomyape   string    `json:"nomyape" validate:"required,max=255"`
 	DNI       string    `json:"dni" validate:"required,len=8, regexp=^[0-9]+$"`
-	Fechanac  time.Time `json:"fechanac" validate:"required,birthday"`
+	Fechanac  time.Time `json:"fechanac" validate:"required"`
 	Sexo      Sexo      `json:"sexo"`
 	Email     string    `json:"email" validate:"email"`
 	Direccion string    `json:"direccion" validate:"required,max=255"`
 	Telefono  string    `json:"telefono" validate:"required,max=20"`
 }
-
-func BirthdayValidator(fl validator.FieldLevel) bool {
-	fecha := fl.Field().Interface().(time.Time)
-	ahora := time.Now()
-
-	edad := ahora.Year() - fecha.Year()
-	if ahora.YearDay() < fecha.YearDay() {
-		edad-- // Ajuste si no ha cumplido años aún en el año actual
-	}
-
-	return edad > 0 && edad <= 150
-}
-
-func RegisterCustomValidators(v *validator.Validate) {
-	v.RegisterValidation("birthday", BirthdayValidator)
-}
+*/
 
 /*
 type Turno struct {
