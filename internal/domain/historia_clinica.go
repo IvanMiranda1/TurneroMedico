@@ -1,6 +1,6 @@
 package domain
 
-type Historia_clinica struct {
+type HistoriaClinica struct {
 	ID          string
 	PacienteID  string
 	TurnoID     string
@@ -8,8 +8,8 @@ type Historia_clinica struct {
 	Tratamiento string
 }
 
-func NewHistoria_clinica(id, pacienteID, turnoID, diagnostico, tratamiento string) *Historia_clinica {
-	return &Historia_clinica{
+func NewHistoriaClinica(id, pacienteID, turnoID, diagnostico, tratamiento string) *HistoriaClinica {
+	return &HistoriaClinica{
 		ID:          id,
 		PacienteID:  pacienteID,
 		TurnoID:     turnoID,

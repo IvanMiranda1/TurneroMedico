@@ -2,6 +2,8 @@ package domain
 
 import "fmt"
 
+// Tipo de datos reutilizables, utilizados en la logica de negocio
+
 type Sexo int
 
 const (
@@ -10,8 +12,23 @@ const (
 	Otro
 )
 
+// enum a string
 func (s Sexo) String() string {
 	return [...]string{"Masculino", "Femenino", "Otro"}[s]
+}
+
+// String a enum
+func ParseSexo(s string) (Sexo, error) {
+	switch s {
+	case "Masculino":
+		return Masculino, nil
+	case "Femenino":
+		return Femenino, nil
+	case "Otro":
+		return Otro, nil
+	default:
+		return -1, fmt.Errorf("Sexo no valido: %s", s)
+	}
 }
 
 type TipoAntecendente int
@@ -27,6 +44,8 @@ func (a TipoAntecendente) String() string {
 	return [...]string{"Familiar", "Patologico", "NoPatologico", "GinecoObstetrico"}[a]
 }
 
+// Me sirve para poder usar un rango de horarios para las jornadas laborales
+// tambien puede ser horario para rango de horarios de los turnos es decir, horarios de 45min?
 type TimeOfDay struct {
 	Hour   int
 	Minute int

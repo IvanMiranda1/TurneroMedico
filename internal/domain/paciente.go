@@ -1,33 +1,31 @@
 package domain
 
 import (
-	"fmt"
 	"time"
 )
 
-// String a enum
-func ParseSexo(s string) (Sexo, error) {
-	switch s {
-	case "Masculino":
-		return Masculino, nil
-	case "Femenino":
-		return Femenino, nil
-	case "Otro":
-		return Otro, nil
-	default:
-		return -1, fmt.Errorf("Sexo no valido: %s", s)
-	}
-}
-
 type Paciente struct {
-	ID        int
+	ID        string
 	Nomyape   string
 	DNI       string
 	Fechanac  time.Time
-	Sexo      Sexo
 	Email     string
 	Direccion string
 	Telefono  string
+	Sexo      Sexo
+}
+
+func NewPaciente(id, nomyape, dni string, fechanac time.Time, email, direccion, telefono string, sexo Sexo) *Paciente {
+	return &Paciente{
+		ID:        id,
+		Nomyape:   nomyape,
+		DNI:       dni,
+		Fechanac:  fechanac,
+		Email:     email,
+		Direccion: direccion,
+		Telefono:  telefono,
+		Sexo:      sexo,
+	}
 }
 
 /*
