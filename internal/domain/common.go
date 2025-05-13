@@ -31,7 +31,7 @@ func ParseSexo(s string) (Sexo, error) {
 	}
 }
 
-type TipoAntecendente int
+type TipoAntecedente int
 
 const (
 	Familiar = iota
@@ -40,7 +40,7 @@ const (
 	GinecoObstetrico
 )
 
-func (a TipoAntecendente) String() string {
+func (a TipoAntecedente) String() string {
 	return [...]string{"Familiar", "Patologico", "NoPatologico", "GinecoObstetrico"}[a]
 }
 

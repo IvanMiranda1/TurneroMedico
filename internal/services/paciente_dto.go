@@ -66,3 +66,21 @@ func FromDomain(p *domain.Paciente) *PacienteResponse {
 		Sexo:      p.Sexo.String(),
 	}
 }
+
+// Alergia
+type AlergiaDTO struct {
+	Descripcion string `json:"descripcion"`
+}
+
+type AntecedenteDTO struct {
+	Tipo        string `json:"tipo"`
+	Descripcion string `json:"descripcion"`
+}
+
+type HistoriaClinicaRepsonse struct {
+	ID           string           `json:"id"`
+	Diagnostico  string           `json:"diagnostico"`
+	Tratamiento  string           `json:"tratamiento"`
+	Alergias     []AlergiaDTO     `json:"alergias"`
+	Antecedentes []AntecedenteDTO `json:"antecedentes"`
+}

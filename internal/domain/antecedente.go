@@ -1,14 +1,14 @@
 package domain
 
-type Antecentes struct {
+type Antecedente struct {
 	ID          string
 	HistoriaID  string
-	Tipo        TipoAntecendente
+	Tipo        TipoAntecedente
 	Descripcion string
 }
 
-func NewAntecedentes(id, historiaID string, tipo TipoAntecendente, descripcion string) *Antecentes {
-	return &Antecentes{
+func NewAntecedentes(id, historiaID string, tipo TipoAntecedente, descripcion string) *Antecedente {
+	return &Antecedente{
 		ID:          id,
 		HistoriaID:  historiaID,
 		Tipo:        tipo,
