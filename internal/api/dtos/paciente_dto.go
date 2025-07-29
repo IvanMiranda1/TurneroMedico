@@ -1,4 +1,7 @@
-package services
+package dtos
+
+//el paciente esta fuertemente relacionado con su historia clinica por lo que se decide realizat los dtos de
+//Paciente + historia_clinica + antecedentes + alergias
 
 import (
 	"fmt"
@@ -8,7 +11,7 @@ import (
 )
 
 // dto para la creacion del paciente, no tiene ID
-type CrearPacienteRequest struct {
+type PacienteRequest struct {
 	Nomyape   string `json:"nomyape" validate:"required, min=3, max=255"`
 	DNI       string `json:"dni" validate:"required,len=8"`
 	Fechanac  string `json:"fechanac" validate:"required,datetime=2006/01/02"`
@@ -19,8 +22,8 @@ type CrearPacienteRequest struct {
 }
 
 // toDomain parse - para que siga el struct del domain
-func (r *CrearPacienteRequest) ToDomain() (*domain.Paciente, error) {
-	fechanaci, err := time.Parse("2004/02/01", r.Fechanac)
+func (r *PacienteRequest) ToDomain() (*domain.Paciente, error) {
+	fechanaci, err := time.Parse("2006/01/02", r.Fechanac)
 	if err != nil {
 		return nil, fmt.Errorf("formato de nacimiento invalido (esperado YYYY/MM/DD): %w", err)
 	}
@@ -54,7 +57,7 @@ type PacienteResponse struct {
 }
 
 // FromDomain convierte una entidad de dominio a un DTO de Response.
-func FromDomain(p *domain.Paciente) *PacienteResponse {
+func PacienteFromDomain(p *domain.Paciente) *PacienteResponse {
 	return &PacienteResponse{
 		ID:        p.ID,
 		Nomyape:   p.Nomyape,
@@ -65,22 +68,4 @@ func FromDomain(p *domain.Paciente) *PacienteResponse {
 		Telefono:  p.Telefono,
 		Sexo:      p.Sexo.String(),
 	}
-}
-
-// Alergia
-type AlergiaDTO struct {
-	Descripcion string `json:"descripcion"`
-}
-
-type AntecedenteDTO struct {
-	Tipo        string `json:"tipo"`
-	Descripcion string `json:"descripcion"`
-}
-
-type HistoriaClinicaRepsonse struct {
-	ID           string           `json:"id"`
-	Diagnostico  string           `json:"diagnostico"`
-	Tratamiento  string           `json:"tratamiento"`
-	Alergias     []AlergiaDTO     `json:"alergias"`
-	Antecedentes []AntecedenteDTO `json:"antecedentes"`
 }

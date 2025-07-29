@@ -8,5 +8,6 @@ type PacienteRepository interface {
 	FindByDNI(dni string) (*domain.Paciente, error)
 	Modificar(pacienteModificado *domain.Paciente) error
 	Delete(id string) error
-	ExistsByEmail(email string) (bool, error)
+	ExistByEmail(email string) (bool, error)
+	ExistByDNI(dni string) (bool, error)
 }
